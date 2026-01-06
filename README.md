@@ -2,6 +2,8 @@
 
 A macOS menu bar indicator that shows a blinking terminal cursor when any Claude Code instance is waiting for user input.
 
+![Demo](demo.gif)
+
 ## Install
 
 ```bash
