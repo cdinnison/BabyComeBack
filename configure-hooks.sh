@@ -1,5 +1,5 @@
 #!/bin/bash
-# Automatically configure Claude Code hooks for ClaudeStatusBar
+# Automatically configure Claude Code hooks for BabyComeBack
 
 set -e
 

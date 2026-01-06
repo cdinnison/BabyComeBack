@@ -1,7 +1,7 @@
 import AppKit
 import Foundation
 
-class ClaudeStatusBarApp: NSObject, NSApplicationDelegate {
+class BabyComeBackApp: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem!
     private var waitingSessions: Set<String> = []
     private var pulseTimer: Timer?
@@ -13,7 +13,7 @@ class ClaudeStatusBarApp: NSObject, NSApplicationDelegate {
         setupMenu()
         registerForNotifications()
 
-        NSLog("ClaudeStatusBar: Running. Listening for Claude notifications...")
+        NSLog("BabyComeBack: Running. Listening for Claude notifications...")
     }
 
     private func setupMenu() {
@@ -62,7 +62,7 @@ class ClaudeStatusBarApp: NSObject, NSApplicationDelegate {
         let sessionId = notification.userInfo?["sessionId"] as? String ?? UUID().uuidString
         let message = notification.userInfo?["message"] as? String ?? "Claude needs attention"
 
-        NSLog("ClaudeStatusBar: Needs attention - session: %@, message: %@", sessionId, message)
+        NSLog("BabyComeBack: Needs attention - session: %@, message: %@", sessionId, message)
 
         DispatchQueue.main.async {
             self.waitingSessions.insert(sessionId)
@@ -74,10 +74,10 @@ class ClaudeStatusBarApp: NSObject, NSApplicationDelegate {
     @objc private func handleResumed(_ notification: Notification) {
         let sessionId = notification.userInfo?["sessionId"] as? String
 
-        NSLog("ClaudeStatusBar: Resumed - session: %@", sessionId ?? "all")
+        NSLog("BabyComeBack: Resumed - session: %@", sessionId ?? "all")
 
         DispatchQueue.main.async {
-            if let sessionId = sessionId {
+            if let sessionId = sessionId, !sessionId.isEmpty {
                 self.waitingSessions.remove(sessionId)
             } else {
                 self.waitingSessions.removeAll()
@@ -164,7 +164,7 @@ class ClaudeStatusBarApp: NSObject, NSApplicationDelegate {
 
 // App entry point
 let app = NSApplication.shared
-let delegate = ClaudeStatusBarApp()
+let delegate = BabyComeBackApp()
 app.delegate = delegate
 app.setActivationPolicy(.accessory)  // Menu bar only, no dock icon
 app.run()

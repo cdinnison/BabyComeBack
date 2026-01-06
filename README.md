@@ -1,11 +1,11 @@
-# ClaudeStatusBar
+# BabyComeBack
 
 A macOS menu bar indicator that shows a blinking terminal cursor when any Claude Code instance is waiting for user input.
 
 ## Install
 
 ```bash
-git clone <repo> && cd ClaudeStatusBar
+git clone <repo> && cd BabyComeBack
 ./install.sh
 ./configure-hooks.sh
 ```

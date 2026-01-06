@@ -2,11 +2,11 @@
 import PackageDescription
 
 let package = Package(
-    name: "ClaudeStatusBar",
+    name: "BabyComeBack",
     platforms: [.macOS(.v12)],
     targets: [
         .executableTarget(
-            name: "ClaudeStatusBar",
+            name: "BabyComeBack",
             path: "Sources",
             sources: ["main.swift"]
         ),

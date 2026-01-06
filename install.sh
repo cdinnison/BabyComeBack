@@ -1,10 +1,10 @@
 #!/bin/bash
-# ClaudeStatusBar installer
+# BabyComeBack installer
 # One-command install for the Claude Code status indicator
 
 set -e
 
-echo "Installing ClaudeStatusBar..."
+echo "Installing BabyComeBack..."
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 INSTALL_DIR="$HOME/.local/bin"
@@ -23,7 +23,7 @@ swift build -c release
 
 # Install binaries
 echo "Installing binaries to $INSTALL_DIR..."
-cp ".build/release/ClaudeStatusBar" "$INSTALL_DIR/"
+cp ".build/release/BabyComeBack" "$INSTALL_DIR/"
 cp ".build/release/claude-status-notify" "$INSTALL_DIR/"
 
 # Install hook scripts
@@ -34,7 +34,7 @@ chmod +x "$HOOKS_DIR/claude-needs-attention.sh"
 chmod +x "$HOOKS_DIR/claude-resumed.sh"
 
 # Create LaunchAgent for auto-start
-PLIST_PATH="$LAUNCH_AGENTS_DIR/com.claude.statusbar.plist"
+PLIST_PATH="$LAUNCH_AGENTS_DIR/com.babycomebackapp.plist"
 echo "Creating LaunchAgent at $PLIST_PATH..."
 cat > "$PLIST_PATH" << EOF
 <?xml version="1.0" encoding="UTF-8"?>
@@ -42,10 +42,10 @@ cat > "$PLIST_PATH" << EOF
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.claude.statusbar</string>
+    <string>com.babycomebackapp</string>
     <key>ProgramArguments</key>
     <array>
-        <string>$INSTALL_DIR/ClaudeStatusBar</string>
+        <string>$INSTALL_DIR/BabyComeBack</string>
     </array>
     <key>RunAtLoad</key>
     <true/>
@@ -56,7 +56,7 @@ cat > "$PLIST_PATH" << EOF
 EOF
 
 # Load the LaunchAgent (start now)
-echo "Starting ClaudeStatusBar..."
+echo "Starting BabyComeBack..."
 launchctl unload "$PLIST_PATH" 2>/dev/null || true
 launchctl load "$PLIST_PATH"
 
